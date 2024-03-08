@@ -13,4 +13,3 @@ def after_request(r):
     print("Elapse time  = "+ str(g.request_time()))
     return r 
 
-
