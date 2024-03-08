@@ -14,5 +14,3 @@ def after_request(r):
     return r 
 
 
-def test():
-    print("Hello")
