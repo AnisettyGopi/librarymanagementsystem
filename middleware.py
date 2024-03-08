@@ -12,3 +12,7 @@ def after_request(r):
     g.request_time = lambda: "%.5fs" % (time.time() - g.request_start_time)
     print("Elapse time  = "+ str(g.request_time()))
     return r 
+
+
+def test():
+    print("Hello")
