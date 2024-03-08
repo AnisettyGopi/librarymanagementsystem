@@ -1,2 +1,15 @@
-venv
+# Ignore compiled Python files
+*.pyc
+
+# Ignore virtual environment directories
 venv/
+
+# Ignore log files
+*.log
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore IDE specific files
+.idea/
+.vscode/
