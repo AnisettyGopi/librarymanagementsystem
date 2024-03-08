@@ -14,4 +14,3 @@ def after_request(r):
     return r 
 
 
-print("Hello")
