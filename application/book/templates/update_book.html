@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title> Books </title>
+{% endblock head %}
+
+{% block content %}
+
+
+<div class="col-md-10">
+    <div class="content-section">
+  <div class="content-section">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4"> Book Update</legend>
+            <div class="form-group">
+                {{form.bookname.label(class = "form-control-label") }}
+                {% if form.bookname.errors %}
+                {{ form.bookname (class = "form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {%for error in form.bookname.errors%}
+                        <span> {{error}} </span>
+                    {%endfor%}
+                </div>
+                {%else%}
+                {{form.bookname(class = "form-control form-control-lg") }}
+                {% endif %}
+  
+            </div>
+  
+            <div class="form-group">
+  
+                {{form.publisher.label(class = "form-control-label") }}
+                {% if form.publisher.errors %}
+                {{form.publisher (class = "form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {%for error in form.publisher.errors%}
+                        <span> {{error}} </span>
+                    {% endfor %}
+                </div>
+                {%else%}
+                {{form.publisher (class = "form-control form-control-lg") }}
+                {% endif %}
+  
+            </div>
+  
+            <div class="form-group">
+                {{form.author.label(class = "form-control-label") }}
+                {% if form.author.errors %}
+                {{form.author (class = "form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {%for error in form.author.errors%}
+                        <span> {{error}} </span>
+                    {%endfor%}
+                </div>
+                {%else%}
+                {{form.author (class = "form-control form-control-lg") }}
+                {% endif %}
+            </div>
+  
+        </fieldset> 
+  
+        <div class="form-group">
+            {{form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+  </div>       
+
+    </div>
+</div>
+
+{% endblock content %}
+
+

@@ -1,0 +1,768 @@
+{
+    "openapi" : "3.0.0",
+    "info" : {
+        "title" : "Libraray Management System",
+        "description" : "Written by Gopi Anisetty"
+
+    },
+    "tages" : [
+        {
+            "name" : "API Services",
+            "description" : "Test Apis"
+        }
+    ],
+
+    "components" : {
+        "schemas" : {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                    "type": "string"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "pattern": "\\.[Ii][Oo]$"
+                      },
+                    "password": {
+                      "type": "string"
+                      }
+                }
+            },
+            "Book": {
+                "type": "object",
+                "properties": {
+                    "bookname": {
+                    "type": "string"
+                    },
+                    "publisher": {
+                    "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                      }
+                }
+            },
+            "Library" : {
+                "type" : "object",
+                "properties" : {
+                    "username" : {
+                        "type" : "string"
+                    },
+                    "bood_id" : {
+                        "type" : "integer"
+                    }
+                }
+                
+            } ,
+            "id" : {
+                "type" : "integer",
+                "properties" : {
+                    "id" : {
+                        "type" : "integer"
+                    }
+                }
+            },
+        
+        "user_name" : {
+            "type" : "string",
+            "properties" : {
+                "user_name" : {
+                    "type" : "string"
+                }
+            }
+        },
+
+        "update_user":{
+            "type": "object",
+            "properties" :{
+                 "username": {
+                  "type": "string"
+                  },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+            }
+          },
+
+          "update_book":{
+            "type": "object",
+            "properties" :{
+                 "bookname": {
+                  "type": "string"
+                  },
+                "publisher": {
+                  "type": "string"
+                },
+                "author": {
+                  "type": "string"
+                }
+            }
+          }
+
+
+    }
+    },
+
+
+    "paths" : {
+        
+    "/users": {
+        "post": {
+        "tags": [
+            "USER APIS"
+        ],
+        "summary": "Add user",
+        "requestBody": {
+        "description": "Add new user to database",
+        "required": true,
+        "content": {
+            "application/json": {
+            "schema": {
+                "$ref": "#/components/schemas/User"
+                }
+            }
+        }
+        },
+        "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/User"
+                }
+            }
+          }
+        },
+
+        "get": {
+          "tags": [
+              "USER APIS"
+          ],
+          "summary": "GET USER",
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/User"
+                  }
+              }
+            }
+          }
+      },
+
+      "/users/{user_name}" : {
+        "get" :{
+          "tags" : [
+            "USER APIS"
+          ],
+          "summary" : "Get user by Username",
+          "parameters" : [{
+              "name" : "user_name",
+              "in" : "path",
+              "description" : "Get user by Name",
+              "required" : "true",
+              "type" : "string",
+              "schema" : {
+                "$ref" : "#/components/schemas/user_name"
+               }
+            }],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+                },
+                "406": {
+                  "description": "Not Found user",
+                  "schema": {
+                  "$ref": "#/components/schemas/User"
+                  }
+              }
+              }
+        },
+
+        "put" :{
+          "tags" : [
+            "USER APIS"
+          ],
+          "summary" : "Update user by Username",
+          "parameters" : [{
+              "name" : "user_name",
+              "in" : "path",
+              "description" : "Get user by Name",
+              "required" : "true",
+              "type" : "string",
+              "schema" : {
+                "$ref" : "#/components/schemas/user_name"
+               }
+            }],
+            "requestBody": {
+              "description": "Update a user",
+              "required": true,
+              "content": {
+                  "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/update_user"
+                      }
+                  }
+              }
+              },
+
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/User"
+                    }
+                },
+                "406": {
+                  "description": "Not Found user",
+                  "schema": {
+                  "$ref": "#/components/schemas/User"
+                  }
+              }
+              }
+        },
+      
+
+      "delete" :{
+        "tags" : [
+          "USER APIS"
+        ],
+        "summary" : "Delete user by Username",
+        "parameters" : [{
+            "name" : "user_name",
+            "in" : "path",
+            "description" : "Delete user by Name",
+            "required" : "true",
+            "type" : "string",
+            "schema" : {
+              "$ref" : "#/components/schemas/user_name"
+             }
+          }],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/User"
+                  }
+              },
+              "406": {
+                "description": "Not Found user",
+                "schema": {
+                "$ref": "#/components/schemas/User"
+                }
+            }
+            }
+      }
+    },
+
+
+    
+    
+    "/books" : {
+        "get" : {
+            "tags" : ["Book Apis"],
+            "summary" : "Get all books ",
+            "responses" : {
+                "200" : {
+                    "description" : "OK",
+                    "schema" : {
+                        "$ref" :"#/components/schemas/Book"
+                    }
+                }
+            }
+        },
+
+        "post": {
+            "tags": [
+                "Book Apis"
+            ],
+            "summary": "Add Book",
+            "requestBody": {
+            "description": "Add new Book to database",
+            "required": "true",
+            "content": {
+                "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/Book"
+                    }
+                }
+            }
+            },
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Book"
+                    }
+                }
+              }
+            }
+
+    },
+
+    "/books/{id}" : {
+        "get" :{
+          "tags" : [
+            "Book Apis"
+          ],
+          "summary" : "Get Book by Id",
+          "parameters" : [{
+              "name" : "id",
+              "in" : "path",
+              "description" : "Get book by Id",
+              "required" : "true",
+              "type" : "integer",
+              "schema" : {
+                "$ref" : "#/components/schemas/id"
+               }
+            }],
+            "responses": {
+                "200": {
+                    "description": "OK",
+                    "schema": {
+                    "$ref": "#/components/schemas/Book"
+                    }
+                },
+                "406": {
+                  "description": "Not Found ",
+                  "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+              }
+              }
+        },
+
+        "put" : {
+            "tags" : ["Book Apis"],
+            "summary" : "Update book by id",
+            "parameters" : [{
+                "name" : "id",
+                "in" : "path",
+                "description" : "Update book by Id",
+                "required" : "true",
+                "type" : "integer",
+                "schema" : {
+                  "$ref" : "#/components/schemas/id"
+                 }
+              }],
+
+              "requestBody": {
+                "description": "Update a Book",
+                "required": true,
+                "content": {
+                    "application/json": {
+                    "schema": {
+                        "$ref": "#/components/schemas/update_book"
+                        }
+                    }
+                }
+                },
+  
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                      "$ref": "#/components/schemas/Book"
+                      }
+                  },
+                  "406": {
+                    "description": "Not Found ",
+                    "schema": {
+                    "$ref": "#/components/schemas/Book"
+                    }
+                }      
+            }
+        },
+        "delete" :{
+            "tags" : [
+              "Book Apis"
+            ],
+            "summary" : "Delete Book by Id",
+            "parameters" : [{
+                "name" : "id",
+                "in" : "path",
+                "description" : "Delete Book by Id",
+                "required" : "true",
+                "type" : "integer",
+                "schema" : {
+                  "$ref" : "#/components/schemas/id"
+                 }
+              }],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "schema": {
+                      "$ref": "#/components/schemas/Book"
+                      }
+                  },
+                  "406": {
+                    "description": "Not Found user",
+                    "schema": {
+                    "$ref": "#/components/schemas/Book"
+                    }
+                }
+                }
+          }
+
+
+    },
+
+
+    "/libraryHome" : {
+        "get" : {
+            "tags" : ["Library Apis"],
+            "summary" : "Get all Library details",
+            "responses" : {
+                "200" : {
+                    "description" : "OK",
+                    "schema" : {
+                        "$ref" : "#components/schemas/Library"
+                    }
+                },
+                "404" : {
+                    "description" : "Not found",
+                    "schema" : {
+                        "$ref" : "#components/schemas/Library"
+                    }
+                }
+            }
+        }
+    },
+
+"/library/users" : {
+    "get" : {
+        "tags" : ["Library Apis"],
+        "summary" : "Get all Users from library",
+        "responses" : {
+            "200" : {
+                "description" : "OK",
+                "schema" : {
+                    "$ref" : "#components/schemas/Library"
+                }
+            },
+            "404" : {
+                "description" : "Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/Library"
+                }
+            }
+        }
+    },
+
+    "post" : {
+        "tags" : ["Library Apis"],
+        "summary" : "Add a user through Library Api",
+        "requestBody" : {
+            "required" : "true",
+            "description" : "data of new user",
+            "content" : {
+                "application/json": {
+                    "schema": {
+                        "$ref" : "#components/schemas/User"
+                    }
+                }
+            }
+        },
+
+        "responses" : {
+            "200" : {
+                "description" : "ok",
+                "schema": {
+                    "$ref" : "#components/schemas/User"
+                }
+            },
+            "404" : {
+                "description" :"Not found",
+                "schema" : {
+                    "$ref" :"#components/schemas/User"
+                }
+
+            }
+        }
+
+    }
+
+},
+
+"/library/books" : {
+    "get" : {
+        "tags" : ["Library Apis"],
+        "summary" : "Get all books through Library api",
+        "responses" : {
+            "200" : {
+                "description" : "ok",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            },
+            "404" : {
+                "description" :"Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            }
+
+        }
+    },
+    "post" : {
+        "tags" : ["Library Apis"],
+        "summary" : "Add  book through Library api",
+        "requestBody" : {
+            "description" : "enter details of book",
+            "required" : "true",
+            "content" : {
+                "application/json" : {
+                    "schema" : {
+                        "$ref" :"#components/schemas/Book"
+                    }
+                }
+            }
+        },
+
+        "responses" : {
+            "200" : {
+                "description" : "ok",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            },
+            "404" : {
+                "description" :"Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            }
+
+        }
+    }
+},
+
+"/library/books/{id}" : {
+    "get" : {
+        "tags" : ["Library Apis"],
+        "summary" : "Get a book details through Library Api",
+        "parameters" : [{
+            "in" : "path",
+            "name" : "id",
+            "type" : "string",
+            "schema" : {
+                "$ref" : "#components/schemas/id"
+            }
+        }],
+        "responses" : {
+            "200" : {
+                "description" : "ok",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            },
+            "404" : {
+                "description" : "Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            }
+        }
+
+    },
+    "delete" : {
+        "tags" : ["Library Apis"],
+        "summary" : "Get a book details through Library Api",
+        "parameters" : [{
+            "in" : "path",
+            "name" : "id",
+            "type" : "string",
+            "schema" : {
+                "$ref" : "#components/schemas/id"
+            }
+        }],
+        "responses" : {
+            "200" : {
+                "description" : "ok",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            },
+            "404" : {
+                "description" : "Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            }
+        }
+
+    }
+},
+
+"/library/users/{user_name}" : {
+    "get" : {
+        "tags" :["Library Apis"],
+        "summary" : "Get all the book details owned by User",
+        "parameters" : [{
+            "name" : "user_name",
+            "in" : "path",
+            "type" : "string",
+            "content" : {
+                "application/json" : {
+                    "schema" :{
+                        "$ref" : "#components/schemas/user_name"
+                    }
+                }
+            }
+        }],
+        "responses" : {
+            "200" : {
+                "description" : "OK",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            },
+            "404" : {
+                "description" :"Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/Book"
+                }
+            }
+
+        }
+    },
+    "delete" : {
+        "tags" :["Library Apis"],
+        "summary" : "Delete a user from User table",
+        "parameters" : [{
+            "name" : "user_name",
+            "in" : "path",
+            "type" : "string",
+            "content" : {
+                "application/json" : {
+                    "schema" :{
+                        "$ref" : "#components/schemas/user_name"
+                    }
+                }
+            }
+        }],
+        "responses" : {
+            "200" : {
+                "description" : "OK",
+                "schema" : {
+                    "$ref" : "#components/schemas/User"
+                }
+            },
+            "404" : {
+                "description" :"Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/User"
+                }
+            }
+
+        }
+    }
+},
+
+
+"/library/users/{user_name}/books/{id}" : {
+    "post" : {
+        "tags" : ["Library Apis"],
+        "summary" : "Assign a particular book to user",
+        "parameters" : [{
+            "name" : "user_name",
+            "in" : "path",
+            "required" : "true",
+            "type" : "string",
+            "content" : {
+                "application/json" : {
+                    "schema" : {
+                        "$ref" : "#components/schemas/user_name"
+                    }
+                }
+            }
+        },
+        {
+            "name" : "id",
+            "in" : "path",
+            "required" : "true",
+            "type" : "integer",
+            "content" : {
+                "application/json" : {
+                    "schema" : {
+                        "$ref" : "#components/schemas/id"
+                    }
+                }
+            }
+        }],
+
+        "responses" : {
+            "200" : {
+                "description" : "OK", 
+                "schema" : {
+                    "$ref" : "#components/schemas/Library"
+                }
+                
+            },
+            "404" : {
+                "description" : "Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/Library"
+                }
+            }
+        }
+    },
+    "delete" : {
+        "tags" : ["Library Apis"],
+        "summary" : "Delete a assigned book to user",
+        "parameters" : [{
+            "name" : "user_name",
+            "in" : "path",
+            "required" : "true",
+            "type" : "string",
+            "content" : {
+                "application/json" : {
+                    "schema" : {
+                        "$ref" : "#components/schemas/user_name"
+                    }
+                }
+            }
+        },
+        {
+            "name" : "id",
+            "in" : "path",
+            "required" : "true",
+            "type" : "integer",
+            "content" : {
+                "application/json" : {
+                    "schema" : {
+                        "$ref" : "#components/schemas/id"
+                    }
+                }
+            }
+        }],
+
+        "responses" : {
+            "200" : {
+                "description" : "OK", 
+                "schema" : {
+                    "$ref" : "#components/schemas/Library"
+                }
+                
+            },
+            "404" : {
+                "description" : "Not found",
+                "schema" : {
+                    "$ref" : "#components/schemas/Library"
+                }
+            }
+        }
+    }
+}
+
+}
+
+}
+

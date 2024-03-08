@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title> Users </title>
+{% endblock head %}
+
+{% block content %}
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+
+        <th scope="col">Details</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    {% for user in users %}
+    <tbody>
+      <tr>
+        <th scope="row">{{ user.id}}</th>
+        <td>{{ user.username }}</td>
+        <td></td>
+        <td> <a href="{{ url_for('users.get_user', user_name = user.username)}}" class="link-warning">Details</a> </td>
+        <td> <a href="{{ url_for('users.update_user', user_name = user.username)}}" class="link-warning">Update</a> </td>
+        <td> <a href="{{ url_for('users.delete_user', user_name = user.username)}}" class="link-warning">Delete</a> </td>
+      </tr>
+    </tbody>
+    {% endfor %}  
+  </table>
+  
+  {% endblock content %}
+
+
+{% block page %}
+
+<div class="col-md-5">
+    <div class="content-section">
+       {% block sidebar %}
+        
+  <div class="content-section">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4"> User Registration</legend>
+            <div class="form-group">
+                {{form.username.label(class = "form-control-label") }}
+                {% if form.username.errors %}
+                {{ form.username (class = "form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {%for error in form.username.errors%}
+                        <span> {{error}} </span>
+                    {%endfor%}
+                </div>
+                {%else%}
+                {{form.username(class = "form-control form-control-lg") }}
+                {% endif %}
+  
+            </div>
+  
+            <div class="form-group">
+  
+                {{form.email.label(class = "form-control-label") }}
+                {% if form.email.errors %}
+                {{form.email (class = "form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {%for error in form.email.errors%}
+                        <span> {{error}} </span>
+                    {% endfor %}
+                </div>
+                {%else%}
+                {{form.email (class = "form-control form-control-lg") }}
+                {% endif %}
+  
+            </div>
+  
+            <div class="form-group">
+                {{form.password.label(class = "form-control-label") }}
+                {% if form.password.errors %}
+                {{form.password (class = "form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {%for error in form.password.errors%}
+                        <span> {{error}} </span>
+                    {%endfor%}
+                </div>
+                {%else%}
+                {{form.password (class = "form-control form-control-lg") }}
+                {% endif %}
+            </div>
+  
+            <div class="form-group">
+                {{form.confirm_password.label(class = "form-control-label") }}
+                
+                {% if form.confirm_password.errors %}
+                {{form.confirm_password (class = "form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {%for error in form.confirm_password.errors%}
+                        <span> {{error}} </span>
+                    {%endfor%}
+                </div>
+                {%else%}
+                {{form.confirm_password (class = "form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset> 
+  
+        <div class="form-group">
+            {{form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+  </div>       
+       {% endblock sidebar %}
+    </div>
+</div>
+{% endblock page %}
+

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title> {{title}}</title>
+{% endblock head %}
+
+{% block content %}
+
+<table class="table table-hover">
+    <thead>
+        <tr><h5>USER DETAILS<h5></tr>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+      </tr>
+    </thead>
+   
+    <tbody>
+      <tr>
+        <th scope="row">{{ library_user.id}}</th>
+        <td>{{ library_user.username}}</td>
+        <td>{{ library_user.email }}</td>
+        <td>{{ library_user.password }}</td>
+      </tr>
+      <tr></tr>
+      <tr></tr>
+      <tr></tr>
+    </tbody>
+  </table>
+
+
+  
+<table class="table table-hover">
+      
+    <thead>
+        <tr><h5>BOOKS ASSIGNED</h5></tr>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Publisher</th>
+        <th scope="col">Author</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+        {% for book in books %}
+        <tr>
+            <th scope="row">{{ book.id}}</th>
+            <td>{{ book.bookname}}</td>
+            <td>{{ book.publisher }}</td>
+            <td>{{ book.author }}</td>
+        </tr>
+        {% endfor  %}
+    </tbody>
+  </table>
+
+{% endblock content %}
+
+{% block page %}
+{% endblock page %}

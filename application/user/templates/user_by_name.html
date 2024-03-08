@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title> {{title}}</title>
+{% endblock head %}
+
+{% block content %}
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope = "col">
+      </tr>
+    </thead>
+   
+    <tbody>
+      <tr>
+        <th scope="row">{{ required_user.id}}</th>
+        <td>{{ required_user.username }}</td>
+        <td>{{ required_user.email }}</td>
+        <td>{{ required_user.password }}</td>
+      </tr>
+    </tbody>
+  
+  </table>
+
+{% endblock content %}
+
+{% block page %}
+{% endblock page %}

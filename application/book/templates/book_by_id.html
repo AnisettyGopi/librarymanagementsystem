@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title> {{title}}</title>
+{% endblock head %}
+
+{% block content %}
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Publisher</th>
+        <th scope="col">Author</th>
+        <th scope = "col"></th>
+      </tr>
+    </thead>
+   
+    <tbody>
+      <tr>
+        <th scope="row">{{ required_book.id}}</th>
+        <td>{{ required_book.bookname }}</td>
+        <td>{{ required_book.publisher }}</td>
+        <td>{{ required_book.author }}</td>
+      </tr>
+    </tbody>
+  
+  </table>
+
+{% endblock content %}
+
+{% block page %}
+{% endblock page %}
